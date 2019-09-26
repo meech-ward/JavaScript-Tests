@@ -8,5 +8,13 @@ const tests = {
         chai.expect(testFunction(["1", "-", "1"])).to.equal(0);
       });
     });
+  },
+  'count-letters': () => {
+    it('should correctly count the number of letters in the string', function () {
+      chai.assert.deepEqual(testFunction(""), {});
+      chai.assert.deepEqual(testFunction("a"), {"a": 1});
+      chai.assert.deepEqual(testFunction("aa"), {"a": 2});
+      chai.assert.deepEqual(testFunction("ab"), {"a": 1, "b": 1});
+    });
   }
 }
