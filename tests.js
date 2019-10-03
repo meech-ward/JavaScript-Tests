@@ -44,5 +44,31 @@ const tests = {
         chai.assert.deepEqual(arrayFunctional.cbCallItems, array);
       });
     });
+  },
+  'array-map': () => {
+    it('should call the function n times', function () {
+      [[1], [1,2], [1,2,3,20]].forEach(array => {
+        const arrayFunctional = newArrayFunctional();
+        testFunction(array, arrayFunctional.cbFunction);
+        chai.assert.deepEqual(arrayFunctional.cbCallTimes, array.length);
+      });
+    });
+    it('should pass in the current array value each time', function () {
+      [[1], [1,2], [1,2,3,20]].forEach(array => {
+        const arrayFunctional = newArrayFunctional();
+        testFunction(array, arrayFunctional.cbFunction);
+        chai.assert.deepEqual(arrayFunctional.cbCallItems, array);
+      });
+    });
+    it('should create a new array from the return value', function () {
+      [[1], [1,2], [1,2,3,20]].forEach(array => {
+        const arrayFunctional = newArrayFunctional();
+        const double = item => item*2;
+        arrayFunctional.returnCbFunction = double;
+        const mappedArray = array.map(double);
+        const result = testFunction(array, arrayFunctional.cbFunction);
+        chai.assert.deepEqual(mappedArray, result);
+      });
+    });
   }
 }

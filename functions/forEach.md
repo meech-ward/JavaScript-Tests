@@ -6,7 +6,7 @@ Write a function called `forEach()` that accepts an array and a callback functio
 
 **JavaScript:**
 
-```
+```js
 forEach(["🤗", "💩", "😎"], function(item) {
   console.log(item);
 });
