@@ -70,5 +70,31 @@ const tests = {
         chai.assert.deepEqual(mappedArray, result);
       });
     });
+  },
+  'array-filter': () => {
+    it('should call the function n times', function () {
+      [[1], [1,2], [1,2,3,20]].forEach(array => {
+        const arrayFunctional = newArrayFunctional();
+        testFunction(array, arrayFunctional.cbFunction);
+        chai.assert.deepEqual(arrayFunctional.cbCallTimes, array.length);
+      });
+    });
+    it('should pass in the current array value each time', function () {
+      [[1], [1,2], [1,2,3,20]].forEach(array => {
+        const arrayFunctional = newArrayFunctional();
+        testFunction(array, arrayFunctional.cbFunction);
+        chai.assert.deepEqual(arrayFunctional.cbCallItems, array);
+      });
+    });
+    it('should create a new array with all elements that pass the test implemented by the provided function', function () {
+      [[1], [1,2], [1,2,3,20]].forEach(array => {
+        const arrayFunctional = newArrayFunctional();
+        const filter = item => item>2;
+        arrayFunctional.returnCbFunction = filter;
+        const filteredArray = array.filter(filter);
+        const result = testFunction(array, arrayFunctional.cbFunction);
+        chai.assert.deepEqual(filteredArray, result);
+      });
+    });
   }
 }
